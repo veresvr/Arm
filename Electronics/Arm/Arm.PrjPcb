@@ -188,7 +188,7 @@ ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
-DocumentUniqueId=
+DocumentUniqueId=TBTRXPJB
 
 [Document10]
 DocumentPath=..\..\..\..\techdocs.altiumDotCom\Packages\ST Microcontroller 8-Bit.PcbLib
@@ -206,6 +206,33 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
+
+[Document11]
+DocumentPath=PCB.PcbLib
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=EPJMHKPG
+
+[ProjectVariant1]
+UniqueID=D1E6FD80-B4E6-46B5-A101-3C693B0B12F8
+Description=DNP
+AllowFabrication=0
+ParameterCount=0
+VariationCount=2
+Variation1=Designator=U1|UniqueId=\TRYZQLOD|Kind=1|AlternatePart= 
+Variation2=Designator=C2|UniqueId=\ZOLDGHZE|Kind=1|AlternatePart= 
+ParamVariationCount=0
 
 [Configuration1]
 Name=Sources
