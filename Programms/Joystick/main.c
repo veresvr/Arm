@@ -1,23 +1,32 @@
 #include <stm8s.h>
 #include <stm8s_gpio.h>
 #include <stm8s_clk.h>
-//#include <veres_sound_stm8.h>
-//#include "veres_debug_via_UART_stm8.h"
-//#include "veres_timer2_stm8.h"
-//#include "veres_err_list_stm8.h"
+#include <veres_sound_stm8.h>
+#include "veres_debug_via_UART_stm8.h"
+#include "veres_timer2_stm8.h"
+#include "veres_err_list_stm8.h"
 //#include "veres_ds18b20_stm8.h"
 
 
-
 #define	DELAY_OF_DATA		20		// time of delay before next data packet
-#define	LENGHT	                30		// value of array
+#define	LENGHT	                2		// value of array
 #define	DATA_INC_READY          1		// ready for parsing packet
 #define	DATA_INC_NOREADY        0		// not ready for parsing packet
 
+// mode variants (00b , 11b - reserved)
+#define	MODE_HAND               0x1		// 
+#define	MODE_WRIST              0x2		// 
+
+// speed variants
+#define	SPEED_STOP                0x0		// 
+#define	SPEED_LOW                 0x1		//
+#define	SPEED_MEDIUM              0x2		// 
+#define	SPEED_MAX                 0x3		//
 
 // variables
 uint8_t lenghtOfDataPacket = 0,
 	receive_array[LENGHT],
+        transmit_array[LENGHT],
 	status = 0,
         statusData = DATA_INC_NOREADY,
         err_code = NO_ERROR,
@@ -30,13 +39,31 @@ struct flag{
   unsigned soundAtError: 1;  
 } sound_flag;
 
+struct byte1{
+  uint8_t data;
+  unsigned mode: 2; 
+  unsigned directionA: 3;
+  unsigned directionB: 3;  
+} firstByte;
+
+struct byte2{
+  uint8_t data;
+  unsigned changeStatus: 1; 
+  unsigned soundAtEnd: 1;
+  unsigned soundAtError: 1;  
+} secondByte;
+
+// unions
+
+
+
 // interrupt definitions
  INTERRUPT_HANDLER( UART1_RX, 0x12 );
  INTERRUPT_HANDLER( TIM2_OVF, 13 );
   
 int main( void )
 {
-  CLK->CKDIVR &= ~(CLK_CKDIVR_HSIDIV);    // fHSI= fHSI RC output (configure to 16 MHz)
+  CLK->CKDIVR &= ~(CLK_CKDIVR_HSIDIV);          // fHSI= fHSI RC output (configure to 16 MHz)
   sound_flag.changeStatus = 0;
   sound_flag.soundAtEnd = 0;
   sound_flag.soundAtError = 0;
@@ -52,7 +79,9 @@ int main( void )
   GPIOB->CR1 |= (GPIO_PIN_5);  
   GPIOB->CR2 |= (GPIO_PIN_5);
   
-  
+// default states
+  firstByte.mode = MODE_HAND;
+//  firstByte.directionA = 
   
   while(1){
     

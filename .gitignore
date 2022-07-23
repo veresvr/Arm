@@ -7,3 +7,4 @@ Electronics/Arm/parts/*
 Programms/Joystick/Debug/*
 Programms/Joystick/settings/*
 Programms/Joystick/Release/*
+Programms/Joystick/*.log

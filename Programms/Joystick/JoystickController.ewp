@@ -480,7 +480,7 @@
                 <option>
                     <name>OOCOutputFormat</name>
                     <version>2</version>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>OCOutputOverride</name>
@@ -488,7 +488,7 @@
                 </option>
                 <option>
                     <name>OOCOutputFile</name>
-                    <state>JoystickController.srec</state>
+                    <state>JoystickController.hex</state>
                 </option>
                 <option>
                     <name>OOCCommandLineProducer</name>
@@ -496,7 +496,7 @@
                 </option>
                 <option>
                     <name>OOCObjCopyEnable</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
             </data>
         </settings>
@@ -607,7 +607,7 @@
                 </option>
                 <option>
                     <name>IlinkIcfFile</name>
-                    <state>$TOOLKIT_DIR$\config\lnkstm8s103f3.icf</state>
+                    <state>$TOOLKIT_DIR$\config\lnkstm8.icf</state>
                 </option>
                 <option>
                     <name>IlinkIcfFileSlave</name>
