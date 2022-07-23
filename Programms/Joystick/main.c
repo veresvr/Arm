@@ -1,3 +1,12 @@
+/*
+
+
+
+
+
+
+*/
+
 #include <stm8s.h>
 #include <stm8s_gpio.h>
 #include <stm8s_clk.h>
@@ -19,9 +28,18 @@
 
 // speed variants
 #define	SPEED_STOP                0x0		// 
-#define	SPEED_LOW                 0x1		//
-#define	SPEED_MEDIUM              0x2		// 
-#define	SPEED_MAX                 0x3		//
+#define	SPEED_PLUS_LOW            0x1		//
+#define	SPEED_PLUS_MEDIUM         0x2		// 
+#define	SPEED_PLUS_MAX            0x3		//
+#define	SPEED_MINUS_LOW           0x4		//
+#define	SPEED_MINUS_MEDIUM        0x5		// 
+#define	SPEED_MINUS_MAX           0x6		//
+
+// button 2bit variants
+#define	BUTTON_MOD0               0x0		//
+#define	BUTTON_MOD1               0x1		//
+#define	BUTTON_MOD2               0x2		// reserved
+#define	BUTTON_MOD3               0x3		// reserved
 
 // variables
 uint8_t lenghtOfDataPacket = 0,
@@ -48,11 +66,17 @@ struct byte1{
 
 struct byte2{
   uint8_t data;
-  unsigned changeStatus: 1; 
-  unsigned soundAtEnd: 1;
-  unsigned soundAtError: 1;  
+  unsigned directionC: 3;
+  unsigned directionD: 3;  
+  unsigned buttonF1: 2;
 } secondByte;
 
+struct byte3{
+  uint8_t data;
+  unsigned directionE: 3;
+  unsigned directionF: 3;               // reserved
+  unsigned buttonF2: 2;                 // reserved
+} thirdByte;
 // unions
 
 
@@ -81,9 +105,19 @@ int main( void )
   
 // default states
   firstByte.mode = MODE_HAND;
-//  firstByte.directionA = 
+  firstByte.directionA = SPEED_STOP;
+  firstByte.directionB = SPEED_STOP;
+  secondByte.directionC = SPEED_STOP;
+  secondByte.directionD = SPEED_STOP;
+  secondByte.buttonF1 = BUTTON_MOD0;
+  thirdByte.directionE = SPEED_STOP;  
   
   while(1){
+    
+    
+    
+    
+    
     
     if(statusData == DATA_INC_READY){
       
