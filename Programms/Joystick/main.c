@@ -1,5 +1,9 @@
 /*
 
+pinout:
+PA3 - MODE_BTN (EXTR)
+PB4 - A_PLUS
+PB5 - A_MINUS
 
 
 
@@ -10,7 +14,6 @@
 #include <stm8s.h>
 #include <stm8s_gpio.h>
 #include <stm8s_clk.h>
-#include <veres_sound_stm8.h>
 #include "veres_debug_via_UART_stm8.h"
 #include "veres_timer2_stm8.h"
 #include "veres_err_list_stm8.h"
@@ -114,7 +117,7 @@ int main( void )
   
   while(1){
     
-    
+    // check all buttons
     
     
     
@@ -127,23 +130,20 @@ int main( void )
       { 
         err_code = COMMAND_LESS_3_CHAR;
         UART_sendString("COMMAND_LESS_3_CHAR  ");	          // these and next transmissions only for debug
-        if (sound_flag.soundAtError == 1) makeSound(S_ERROR);
-        continue;
+         continue;
       }
 			
       if((receive_array[0] != '[') || (receive_array[lenghtData-1] != ']'))   //check first and last char of data   ok
       {
         err_code = START_STOP_UNCORR; 
         UART_sendString("START_STOP_UNCORR  ");                   // only for debug, clear before release!
-        if (sound_flag.soundAtError == 1) makeSound(S_ERROR);
         continue;
       } 
       
 
       if((receive_array[1] == 'R') && (receive_array[2] == 'T'))   // read temperature command        half
       {
-        // code for read temperature
-        if (sound_flag.changeStatus == 1) makeSound(S_CHANGE_STATUS);    
+        // code for read temperature   
         continue;
       }
       
@@ -151,14 +151,12 @@ int main( void )
       {
         if ((receive_array[3] == 'E'))  sound_flag.changeStatus = 1;
         if ((receive_array[3] == 'D'))  sound_flag.changeStatus = 0;
-        
-        makeSound(S_CHANGE_STATUS);    
+          
         continue;
       }   
       
       if((receive_array[1] == 'B') && (receive_array[2] == 'C'))   // 
       {
-        makeSound(S_AT_END_PROGR);
         continue;
       }      
       
@@ -166,22 +164,19 @@ int main( void )
       {
         if ((receive_array[3] == 'E'))  sound_flag.soundAtError = 1;
         if ((receive_array[3] == 'D'))  sound_flag.soundAtError = 0;
-        
-        if (sound_flag.changeStatus == 1) makeSound(S_CHANGE_STATUS);    
+           
         continue;
       }
 
       if((receive_array[1] == 'B') && (receive_array[2] == 'E'))   // blow state toggle        half
       {
         // code for blow
-        if (sound_flag.changeStatus == 1) makeSound(S_CHANGE_STATUS);    
         continue;
       }    
       
       if((receive_array[1] == 'I') && (receive_array[2] == 'D'))   // check ID of device        half
       {
-        UART_sendString("[l9]");
-        if (sound_flag.changeStatus == 1) makeSound(S_CHANGE_STATUS);    
+        UART_sendString("[l9]");  
         continue;
       }
 
