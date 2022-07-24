@@ -224,6 +224,23 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=EPJMHKPG
 
+[Document12]
+DocumentPath=Schlib1.SchLib
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=PRCETZQR
+
 [ProjectVariant1]
 UniqueID=D1E6FD80-B4E6-46B5-A101-3C693B0B12F8
 Description=DNP
