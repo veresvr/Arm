@@ -59,23 +59,25 @@ void UART_sendOnlyNumber(uint32_t message)
 
 void UART_Init(void)
 {	
-	// clock 
+// clock 
   CLK->PCKENR1 |= (1<<CLK_PERIPHERAL_UART1);             //  /*!< USART1 clock enable */	
 	
-	// pins
+// only TX pin
   GPIOD->ODR &= ~(GPIO_PIN_5);        // output data register
   GPIOD->DDR |= (GPIO_PIN_5);         // data direction register
   GPIOD->CR1 |= (GPIO_PIN_5);         // control register 1
   GPIOD->CR2 |= (GPIO_PIN_5);         // control register 2
   
-	// configure UART
+// configure UART
   UART1->BRR2 = 0x03;                 // setting a 9600 speed to UART
   UART1->BRR1 = 0x68;                 //
 
-  UART1->CR2 |= //UART1_CR2_TIEN|       // Transmitter interrupt enable
-                UART1_CR2_RIEN|       // Receiver interrupt enable
-                UART1_CR2_TEN|        // Transmitter enable
-                UART1_CR2_REN;       // Receiver enable
+  UART1->CR1 |= UART1_CR1_M|            // 1 Start bit, 9 Data bits, 1 Stop bit
+                UART1_CR1_PCEN;         // Parity control enabled (Even parity)
+  
+  UART1->CR2 |= //UART1_CR2_TIEN|       // Transmitter interrupt enable - turn it on before main() !
+                UART1_CR2_TEN|          // Transmitter enable, Receiver is disabled
+                UART1_CR2_TCIEN;        // Transmission Complete Interrupt Enable
 }
 
 void UART_sendString(char * Text)

@@ -1,20 +1,28 @@
 /*
 
 pinout:
-PA3 - MODE_BTN (EXTR)
+PA3 - MODE_BTN (EXTR INTERRUPT)
+PD4 - JOYSTICK_BTN
+PD6 - SCND_BTN
 PB4 - A_PLUS
 PB5 - A_MINUS
+PD2 - B_ANALOG
+PD3 - E_ANALOG
+PC3 - C_PLUS
+PC4 - C_MINUS
+PC5 - D_PLUS
+PC6 - D_MINUS
+PC7 - 
 
-
-
-
+PD5 -> UART1-TX
+PD1 -> SWIM
 
 */
 
 #include <stm8s.h>
 #include <stm8s_gpio.h>
 #include <stm8s_clk.h>
-#include "veres_debug_via_UART_stm8.h"
+#include "veres_UART_stm8.h"
 #include "veres_timer2_stm8.h"
 #include "veres_err_list_stm8.h"
 //#include "veres_ds18b20_stm8.h"
@@ -22,8 +30,8 @@ PB5 - A_MINUS
 
 #define	DELAY_OF_DATA		20		// time of delay before next data packet
 #define	LENGHT	                2		// value of array
-#define	DATA_INC_READY          1		// ready for parsing packet
-#define	DATA_INC_NOREADY        0		// not ready for parsing packet
+#define	DATA_INC_READY          TRUE		// ready for parsing packet
+#define	DATA_INC_NOREADY        FALSE		// not ready for parsing packet
 
 // mode variants (00b , 11b - reserved)
 #define	MODE_HAND               0x1		// 
@@ -87,17 +95,17 @@ struct byte3{
 // interrupt definitions
  INTERRUPT_HANDLER( UART1_RX, 0x12 );
  INTERRUPT_HANDLER( TIM2_OVF, 13 );
+
+// prototypes
+ void init_GPIO(void);
   
 int main( void )
 {
   CLK->CKDIVR &= ~(CLK_CKDIVR_HSIDIV);          // fHSI= fHSI RC output (configure to 16 MHz)
-  sound_flag.changeStatus = 0;
-  sound_flag.soundAtEnd = 0;
-  sound_flag.soundAtError = 0;
   
   UART_Init();
   TIMER2_Init();
-  initSound();
+  init_GPIO();
   rim();  
   
 //  for led
@@ -228,3 +236,41 @@ __interrupt void TIM2_OVF( void )
   lenghtOfDataPacket = 0;
 
 }
+
+void init_GPIO(void)
+{
+	
+// pins Floating input without interrupt
+//  GPIOD->ODR &= ~(GPIO_PIN_5);                // output data register
+  
+  GPIOB->DDR &= ~(GPIO_PIN_4|GPIO_PIN_5);         // data direction register
+  GPIOC->DDR &= ~(GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6);
+  GPIOD->DDR &= ~(GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_6);
+  
+  GPIOB->CR1 &= ~(GPIO_PIN_4|GPIO_PIN_5);         // control register 1 Floating input
+  GPIOC->CR1 &= ~(GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6);
+  GPIOD->CR1 &= ~(GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_6);
+  
+  GPIOB->CR2 &= ~(GPIO_PIN_4|GPIO_PIN_5);         // control register 2 External interrupt disabled
+  GPIOC->CR2 &= ~(GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6);
+  GPIOD->CR2 &= ~(GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_6);
+  
+// MODE_BTN
+  GPIOA->DDR &= ~(GPIO_PIN_3);         // data direction register
+  GPIOA->CR1 &= ~(GPIO_PIN_3);         // control register 1 Floating input
+  GPIOA->CR2 |= (GPIO_PIN_3);         // control register 2 External interrupt enabled
+
+
+  
+}
+
+
+
+
+
+
+
+
+
+
+
