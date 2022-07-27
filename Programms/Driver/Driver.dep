@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <fileVersion>2</fileVersion>
+    <fileChecksum>807069629</fileChecksum>
+    <configuration>
+        <name>Debug</name>
+        <outputs>
+            <file>$PROJ_DIR$\lib\stm8s_tim2.h</file>
+            <file>$PROJ_DIR$\lib\stm8s_gpio.h</file>
+            <file>$PROJ_DIR$\lib\stm8s_clk.h</file>
+            <file>$PROJ_DIR$\lib\stm8s_exti.h</file>
+            <file>$PROJ_DIR$\lib\stm8s_conf.h</file>
+            <file>$PROJ_DIR$\Debug\Exe\Driver.out</file>
+            <file>$PROJ_DIR$\lib\veres_timer2_stm8.h</file>
+            <file>$PROJ_DIR$\lib\stm8s_tim1.h</file>
+            <file>$PROJ_DIR$\lib\stm8s.h</file>
+            <file>$PROJ_DIR$\lib\stm8s_uart1.h</file>
+            <file>$PROJ_DIR$\main.c</file>
+            <file>$PROJ_DIR$\Debug\Obj\main.o</file>
+            <file>$TOOLKIT_DIR$\inc\c\intrinsics.h</file>
+            <file>$PROJ_DIR$\lib\veres_UART_stm8.h</file>
+            <file>$PROJ_DIR$\lib\veres_err_list_stm8.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\Driver.pbd</file>
+            <file>$PROJ_DIR$\Debug\List\Driver.map</file>
+            <file>$TOOLKIT_DIR$\lib\dlstm8smn.a</file>
+            <file>$TOOLKIT_DIR$\lib\dbgstm8smd.a</file>
+            <file>$TOOLKIT_DIR$\config\lnkstm8.icf</file>
+            <file>$PROJ_DIR$\Debug\Exe\Driver.hex</file>
+        </outputs>
+        <file>
+            <name>[ROOT_NODE]</name>
+            <outputs>
+                <tool>
+                    <name>ILINK</name>
+                    <file> 5 17</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Debug\Exe\Driver.out</name>
+            <outputs>
+                <tool>
+                    <name>OBJCOPY</name>
+                    <file> 21</file>
+                </tool>
+                <tool>
+                    <name>ILINK</name>
+                    <file> 17</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ILINK</name>
+                    <file> 20 11 18 19</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\main.c</name>
+            <outputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 15</file>
+                </tool>
+                <tool>
+                    <name>ICCSTM8</name>
+                    <file> 11</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 12 9 6 2 3 1 13 14 7 8 0 4</file>
+                </tool>
+                <tool>
+                    <name>ICCSTM8</name>
+                    <file> 8 4 2 3 1 7 0 9 12 13 6 14</file>
+                </tool>
+            </inputs>
+        </file>
+        <forcedrebuild>
+            <name>[REBUILD_ALL]</name>
+        </forcedrebuild>
+    </configuration>
+    <configuration>
+        <name>Release</name>
+        <outputs />
+        <forcedrebuild>
+            <name>[MULTI_TOOL]</name>
+            <tool>ILINK</tool>
+        </forcedrebuild>
+    </configuration>
+</project>

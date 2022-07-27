@@ -5,36 +5,35 @@
     <configuration>
         <name>Debug</name>
         <outputs>
-            <file>$PROJ_DIR$\lib\stm8s_tim2.h</file>
-            <file>$PROJ_DIR$\lib\stm8s_clk.h</file>
-            <file>$PROJ_DIR$\Debug\Exe\JoystickController.hex</file>
-            <file>$TOOLKIT_DIR$\inc\c\intrinsics.h</file>
-            <file>$PROJ_DIR$\lib\stm8s_tim1.h</file>
-            <file>$PROJ_DIR$\lib\veres_timer2_stm8.h</file>
-            <file>$PROJ_DIR$\Debug\Exe\JoystickController.out</file>
-            <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
-            <file>$PROJ_DIR$\lib\stm8s_uart1.h</file>
-            <file>$PROJ_DIR$\lib\stm8s_gpio.h</file>
-            <file>$PROJ_DIR$\lib\stm8s.h</file>
-            <file>$PROJ_DIR$\Debug\Obj\JoystickController.pbd</file>
-            <file>$TOOLKIT_DIR$\lib\dbgstm8smd.a</file>
-            <file>$PROJ_DIR$\lib\veres_debug_via_UART_stm8.h</file>
-            <file>$PROJ_DIR$\lib\stm8s_exti.h</file>
-            <file>$TOOLKIT_DIR$\config\lnkstm8.icf</file>
             <file>$PROJ_DIR$\Debug\List\JoystickController.map</file>
-            <file>$PROJ_DIR$\main.c</file>
+            <file>$PROJ_DIR$\Debug\Obj\main.o</file>
             <file>$PROJ_DIR$\lib\stm8s_conf.h</file>
             <file>$PROJ_DIR$\lib\veres_err_list_stm8.h</file>
             <file>$TOOLKIT_DIR$\lib\dlstm8smn.a</file>
-            <file>$PROJ_DIR$\Debug\Obj\main.o</file>
             <file>$PROJ_DIR$\lib\veres_UART_stm8.h</file>
+            <file>$PROJ_DIR$\lib\stm8s.h</file>
+            <file>$TOOLKIT_DIR$\config\lnkstm8.icf</file>
+            <file>$PROJ_DIR$\Debug\Obj\JoystickController.pbd</file>
+            <file>$PROJ_DIR$\lib\stm8s_exti.h</file>
+            <file>$TOOLKIT_DIR$\lib\dbgstm8smd.a</file>
+            <file>$PROJ_DIR$\lib\stm8s_tim2.h</file>
+            <file>$PROJ_DIR$\lib\stm8s_clk.h</file>
+            <file>$PROJ_DIR$\lib\stm8s_tim1.h</file>
+            <file>$PROJ_DIR$\Debug\Exe\JoystickController.hex</file>
+            <file>$TOOLKIT_DIR$\inc\c\intrinsics.h</file>
+            <file>$PROJ_DIR$\lib\veres_timer2_stm8.h</file>
+            <file>$PROJ_DIR$\Debug\Exe\JoystickController.out</file>
+            <file>$PROJ_DIR$\main.c</file>
+            <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
+            <file>$PROJ_DIR$\lib\stm8s_uart1.h</file>
+            <file>$PROJ_DIR$\lib\stm8s_gpio.h</file>
         </outputs>
         <file>
             <name>[ROOT_NODE]</name>
             <outputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 6 16</file>
+                    <file> 17 0</file>
                 </tool>
             </outputs>
         </file>
@@ -42,18 +41,18 @@
             <name>$PROJ_DIR$\Debug\Exe\JoystickController.out</name>
             <outputs>
                 <tool>
-                    <name>ILINK</name>
-                    <file> 16</file>
+                    <name>OBJCOPY</name>
+                    <file> 14</file>
                 </tool>
                 <tool>
-                    <name>OBJCOPY</name>
-                    <file> 2</file>
+                    <name>ILINK</name>
+                    <file> 0</file>
                 </tool>
             </outputs>
             <inputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 15 21 20 12</file>
+                    <file> 7 1 4 10</file>
                 </tool>
             </inputs>
         </file>
@@ -62,21 +61,21 @@
             <outputs>
                 <tool>
                     <name>ICCSTM8</name>
-                    <file> 21</file>
+                    <file> 1</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 7</file>
+                    <file> 19</file>
                 </tool>
             </outputs>
             <inputs>
                 <tool>
                     <name>ICCSTM8</name>
-                    <file> 10 18 1 14 9 4 0 8 3 22 5 19</file>
+                    <file> 6 2 12 9 21 13 11 20 15 5 16 3</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 3 8 5 1 14 9 22 19 4 10 0 18</file>
+                    <file> 15 20 16 12 9 21 5 3 13 6 11 2</file>
                 </tool>
             </inputs>
         </file>
@@ -84,8 +83,8 @@
     <configuration>
         <name>Release</name>
         <outputs>
-            <file>$PROJ_DIR$\Release\Exe\JoystickController.out</file>
             <file>$PROJ_DIR$\Release\Obj\main.pbi</file>
+            <file>$PROJ_DIR$\Release\Exe\JoystickController.out</file>
             <file>$PROJ_DIR$\main.c</file>
         </outputs>
         <file>
@@ -93,7 +92,7 @@
             <outputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 0</file>
+                    <file> 1</file>
                 </tool>
             </outputs>
         </file>
@@ -102,7 +101,7 @@
             <outputs>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 1</file>
+                    <file> 0</file>
                 </tool>
             </outputs>
         </file>

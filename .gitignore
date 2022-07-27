@@ -8,3 +8,5 @@ Programms/Joystick/Debug/*
 Programms/Joystick/settings/*
 Programms/Joystick/Release/*
 Programms/Joystick/*.log
+Programms/Driver/Debug/*
+Programms/Driver/settings/
