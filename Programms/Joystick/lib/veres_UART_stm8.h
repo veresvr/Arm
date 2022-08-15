@@ -35,7 +35,7 @@ For using interrupts, u must write next code:
 #include <stm8s_clk.h>
 
 
-void UART_sendOnlyNumber(uint32_t message);
+void UART_sendData(uint8_t data);
 void UART_Init(void);
 void UART_sendString(char * Text);
 void UART_sendNumber(int32_t number);								
@@ -51,10 +51,10 @@ UART_sendString(message);
 
 */
 
-void UART_sendOnlyNumber(uint32_t message)
+void UART_sendData(uint8_t data)
 {
   while(((UART1->SR) & UART1_FLAG_TC) != UART1_FLAG_TC);	    //wait until Transmission is complete			  
-  UART1->DR = (unsigned char)message; 
+  UART1->DR = data; 
 }
 
 void UART_Init(void)

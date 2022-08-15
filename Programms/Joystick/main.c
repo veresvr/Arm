@@ -26,9 +26,10 @@ PD1 -> SWIM
 #include "veres_timer2_stm8.h"
 #include "veres_err_list_stm8.h"
 //#include "veres_ds18b20_stm8.h"
+#include "stm8s_adc1.h"
 
 
-#define	DELAY_OF_DATA		20		// time of delay before next data packet
+#define	DELAY_OF_TRANSMISSION	20		// (milliseconds: 1 - 999) time of delay between data packets
 #define	LENGHT	                2		// value of array
 #define	DATA_INC_READY          TRUE		// ready for parsing packet
 #define	DATA_INC_NOREADY        FALSE		// not ready for parsing packet
@@ -66,7 +67,8 @@ struct flag{
   unsigned changeStatus: 1; 
   unsigned soundAtEnd: 1;
   unsigned soundAtError: 1;  
-} sound_flag;
+  unsigned dataOutReadySend: 1; 
+} statusFlag;
 
 struct byte1{
   uint8_t data;
@@ -123,13 +125,15 @@ int main( void )
   secondByte.buttonF1 = BUTTON_MOD0;
   thirdByte.directionE = SPEED_STOP;  
   
+  statusFlag.dataOutReadySend = FALSE;
+  
   while(1){
     
     // check all buttons
     
     
     
-    
+    /*
     if(statusData == DATA_INC_READY){
       
       statusData = DATA_INC_NOREADY;
@@ -189,12 +193,20 @@ int main( void )
       }
 
       
-    }  
+    }  */
+    
+    // here we collect all button states
+    
+    // check 2 analog pins
       
-      
-//  UART_sendOnlyNumber(receive_array[lenghtData-1]);
-//  delay();
-//  delay();  
+    while (statusFlag.dataOutReadySend != TRUE);       
+
+    UART_sendData(firstByte.data);
+    UART_sendData(secondByte.data);
+    UART_sendData(thirdByte.data);
+    
+    statusFlag.dataOutReadySend = FALSE;
+    TIMER2_wait_msec(DELAY_OF_TRANSMISSION);
   
     
     
@@ -214,7 +226,7 @@ __interrupt void UART1_RX( void )
   receive_array[lenghtOfDataPacket] = received_data;
   lenghtOfDataPacket++;
 	
-  TIMER2_wait_msec(DELAY_OF_DATA);  
+  TIMER2_wait_msec(20);  
 }
 
 __interrupt void TIM2_OVF( void )
@@ -222,18 +234,7 @@ __interrupt void TIM2_OVF( void )
   TIM2->SR1 &= ~TIM2_SR1_UIF;                           // clear an interrupt flag
   
   TIMER2_stop();
-  UART_sendString("Time is gone. Data receive is ");    // only for debug, clear before release!
-  
-  if (lenghtOfDataPacket == 0){
-    UART_sendString("zero");                            // only for debug, clear before release!
-    statusData = DATA_INC_NOREADY;
-  } else {
-    UART_sendOnlyNumber(lenghtOfDataPacket+48);         // only for debug, clear before release!
-    statusData = DATA_INC_READY;
-  }
-  
-  lenghtData = lenghtOfDataPacket;
-  lenghtOfDataPacket = 0;
+  statusFlag.dataOutReadySend = TRUE;
 
 }
 

@@ -1,3 +1,8 @@
+/*
+this programm read all buttons and send data packet
+
+
+*/
 #include <stm8s.h>
 #include <stm8s_gpio.h>
 #include <stm8s_clk.h>
