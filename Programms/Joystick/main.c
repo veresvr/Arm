@@ -25,8 +25,9 @@ PD1 -> SWIM
 #include "veres_UART_stm8.h"
 #include "veres_timer2_stm8.h"
 #include "veres_err_list_stm8.h"
+#include "veres_adc1_stm8.h"
 //#include "veres_ds18b20_stm8.h"
-#include "stm8s_adc1.h"
+
 
 
 #define	DELAY_OF_TRANSMISSION	20		// (milliseconds: 1 - 999) time of delay between data packets
@@ -47,6 +48,15 @@ PD1 -> SWIM
 #define	SPEED_MINUS_MEDIUM        0x5		// 
 #define	SPEED_MINUS_MAX           0x6		//
 
+// value edges 
+#define	VALUE_PLUS_MAX            255		//
+#define	VALUE_PLUS_MEDIUM         216		// 
+#define	VALUE_PLUS_LOW            182		//
+#define	VALUE_STOP                144		//
+#define	VALUE_MINUS_LOW           109		//
+#define	VALUE_MINUS_MEDIUM        72		// 
+#define	VALUE_MINUS_MAX           36		//
+
 // button 2bit variants
 #define	BUTTON_MOD0               0x0		//
 #define	BUTTON_MOD1               0x1		//
@@ -60,7 +70,8 @@ uint8_t lenghtOfDataPacket = 0,
 	status = 0,
         statusData = DATA_INC_NOREADY,
         err_code = NO_ERROR,
-        lenghtData = 0;
+        lenghtData = 0,
+        adcValue = 0;
 
 // structures
 struct flag{
@@ -100,6 +111,7 @@ struct byte3{
 
 // prototypes
  void init_GPIO(void);
+ uint8_t valueToVariant(uint8_t value);
   
 int main( void )
 {
@@ -264,6 +276,28 @@ void init_GPIO(void)
 
   
 }
+
+ uint8_t valueToVariant(uint8_t value)
+ {
+   if (value<=VALUE_STOP) {
+     
+     if (value<=VALUE_MINUS_MEDIUM) {
+       if (value<=VALUE_MINUS_MAX) return VALUE_MINUS_MAX;
+         else return VALUE_MINUS_MEDIUM;
+     }else{
+       if (value<=VALUE_MINUS_LOW) return VALUE_MINUS_LOW;
+         else return VALUE_STOP;
+     }
+   }else{
+     
+     if (value<=VALUE_PLUS_MEDIUM) {
+       if (value<=VALUE_PLUS_LOW) return VALUE_PLUS_LOW;
+         else return VALUE_PLUS_MEDIUM;
+     }else{
+         return VALUE_PLUS_MAX;
+     } 
+   }
+ }
 
 
 
