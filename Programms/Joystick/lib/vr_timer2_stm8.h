@@ -3,12 +3,8 @@
 				
 	was create:	  28.07.14
 	rewrite to stm8	  16.11.17
-	update:		  19.11.17
-	status: 	  WORK
 
-	need make:	  none	
-
-	other notes:      use as #include "veres_timer2_stm8.h"
+	other notes:      use as #include "vr_timer2_stm8.h"
 
 For using interrupts, u must write next code:
 

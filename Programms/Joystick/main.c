@@ -22,11 +22,11 @@ PD1 -> SWIM
 #include <stm8s.h>
 #include <stm8s_gpio.h>
 #include <stm8s_clk.h>
-#include "veres_UART_stm8.h"
-#include "veres_timer2_stm8.h"
-#include "veres_err_list_stm8.h"
-#include "veres_adc1_stm8.h"
-//#include "veres_ds18b20_stm8.h"
+#include "vr_UART_stm8.h"
+#include "vr_timer2_stm8.h"
+#include "vr_err_list_stm8.h"
+#include "vr_adc1_stm8.h"
+//#include "vr_ds18b20_stm8.h"
 
 
 
@@ -78,7 +78,7 @@ struct flag{
   unsigned changeStatus: 1; 
   unsigned soundAtEnd: 1;
   unsigned soundAtError: 1;  
-  unsigned dataOutReadySend: 1; 
+  unsigned dataOutReadyToSend: 1; 
 } statusFlag;
 
 struct byte1{
@@ -137,7 +137,9 @@ int main( void )
   secondByte.buttonF1 = BUTTON_MOD0;
   thirdByte.directionE = SPEED_STOP;  
   
-  statusFlag.dataOutReadySend = FALSE;
+  statusFlag.dataOutReadyToSend = FALSE;
+  
+  TIMER2_wait_msec(DELAY_OF_TRANSMISSION);      // run it all
   
   while(1){
     
@@ -210,15 +212,17 @@ int main( void )
     // here we collect all button states
     
     // check 2 analog pins
-      
-    while (statusFlag.dataOutReadySend != TRUE);       
-
-    UART_sendData(firstByte.data);
-    UART_sendData(secondByte.data);
-    UART_sendData(thirdByte.data);
     
-    statusFlag.dataOutReadySend = FALSE;
-    TIMER2_wait_msec(DELAY_OF_TRANSMISSION);
+      
+    if (statusFlag.dataOutReadyToSend == TRUE){     //  if DELAY_OF_TRANSMISSION time is
+      UART_sendData(firstByte.data);
+      UART_sendData(secondByte.data);
+      UART_sendData(thirdByte.data);
+      statusFlag.dataOutReadyToSend = FALSE;
+//      TIMER2_wait_msec(DELAY_OF_TRANSMISSION);          // 
+    }
+    
+    
   
     
     
@@ -243,11 +247,11 @@ __interrupt void UART1_RX( void )
 
 __interrupt void TIM2_OVF( void )
 {
-  TIM2->SR1 &= ~TIM2_SR1_UIF;                           // clear an interrupt flag
+  TIM2->SR1 &= ~TIM2_SR1_UIF;                    // clear an interrupt flag
   
   TIMER2_stop();
-  statusFlag.dataOutReadySend = TRUE;
-
+  statusFlag.dataOutReadyToSend = TRUE;
+  TIMER2_wait_msec(DELAY_OF_TRANSMISSION);     // if we need exactly time range
 }
 
 void init_GPIO(void)

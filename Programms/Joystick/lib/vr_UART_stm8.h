@@ -3,12 +3,8 @@
 				
 	was create:	  28.07.14
 	rewrite to stm8	  16.11.17
-	update:		  19.11.17
-	status: 	  WORK
 
-	need make:	  none	
-
-	other notes:      use as #include "veres_debug_via_UART_stm8.h"
+	other notes:      use as #include "vr_UART_stm8.h"
 	baud rate = 9600
 	data bits 8 
 	parity = none
@@ -16,7 +12,7 @@
 	handshaking = none
 
 
-For using interrupts, u must write next code:
+For using interrupts, u need to write next code:
 
   rim(); 
 
