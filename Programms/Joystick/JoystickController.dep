@@ -7,39 +7,35 @@
         <outputs>
             <file>$PROJ_DIR$\lib\stm8s_adc1.h</file>
             <file>$PROJ_DIR$\Debug\Exe\JoystickController.out</file>
-            <file>$PROJ_DIR$\lib\stm8s_uart1.h</file>
             <file>$PROJ_DIR$\Debug\Obj\main.o</file>
+            <file>$PROJ_DIR$\lib\stm8s_uart1.h</file>
             <file>$PROJ_DIR$\Debug\Exe\JoystickController.hex</file>
             <file>$TOOLKIT_DIR$\lib\dlstm8smn.a</file>
-            <file>$PROJ_DIR$\lib\stm8s_gpio.h</file>
-            <file>$PROJ_DIR$\lib\stm8s_tim1.h</file>
-            <file>$PROJ_DIR$\lib\veres_adc1_stm8.h</file>
+            <file>$PROJ_DIR$\main.c</file>
             <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
             <file>$PROJ_DIR$\lib\stm8s.h</file>
+            <file>$PROJ_DIR$\lib\stm8s_tim1.h</file>
             <file>$PROJ_DIR$\lib\stm8s_tim2.h</file>
+            <file>$PROJ_DIR$\lib\stm8s_gpio.h</file>
+            <file>$PROJ_DIR$\lib\stm8s_clk.h</file>
+            <file>$TOOLKIT_DIR$\config\lnkstm8.icf</file>
+            <file>$PROJ_DIR$\lib\vr_adc1_stm8.h</file>
+            <file>$PROJ_DIR$\lib\vr_timer2_stm8.h</file>
+            <file>$PROJ_DIR$\lib\vr_UART_stm8.h</file>
+            <file>$PROJ_DIR$\lib\vr_err_list_stm8.h</file>
             <file>$TOOLKIT_DIR$\lib\dbgstm8smd.a</file>
             <file>$PROJ_DIR$\lib\stm8s_conf.h</file>
-            <file>$PROJ_DIR$\lib\veres_UART_stm8.h</file>
-            <file>$PROJ_DIR$\lib\veres_timer2_stm8.h</file>
-            <file>$PROJ_DIR$\lib\stm8s_exti.h</file>
-            <file>$PROJ_DIR$\main.c</file>
-            <file>$PROJ_DIR$\lib\veres_err_list_stm8.h</file>
             <file>$TOOLKIT_DIR$\inc\c\intrinsics.h</file>
-            <file>$TOOLKIT_DIR$\config\lnkstm8.icf</file>
-            <file>$PROJ_DIR$\Debug\Obj\JoystickController.pbd</file>
             <file>$PROJ_DIR$\Debug\List\JoystickController.map</file>
-            <file>$PROJ_DIR$\lib\stm8s_clk.h</file>
-            <file>$PROJ_DIR$\lib\vr_UART_stm8.h</file>
-            <file>$PROJ_DIR$\lib\vr_adc1_stm8.h</file>
-            <file>$PROJ_DIR$\lib\vr_err_list_stm8.h</file>
-            <file>$PROJ_DIR$\lib\vr_timer2_stm8.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\JoystickController.pbd</file>
+            <file>$PROJ_DIR$\lib\stm8s_exti.h</file>
         </outputs>
         <file>
             <name>$PROJ_DIR$\Debug\Exe\JoystickController.out</name>
             <outputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 22</file>
+                    <file> 21</file>
                 </tool>
                 <tool>
                     <name>OBJCOPY</name>
@@ -49,64 +45,64 @@
             <inputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 20 3 5 12</file>
+                    <file> 13 2 5 18</file>
                 </tool>
             </inputs>
-        </file>
-        <file>
-            <name>[ROOT_NODE]</name>
-            <outputs>
-                <tool>
-                    <name>ILINK</name>
-                    <file> 22 1</file>
-                </tool>
-            </outputs>
         </file>
         <file>
             <name>$PROJ_DIR$\main.c</name>
             <outputs>
                 <tool>
                     <name>ICCSTM8</name>
-                    <file> 3</file>
+                    <file> 2</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 9</file>
+                    <file> 7</file>
                 </tool>
             </outputs>
             <inputs>
                 <tool>
                     <name>ICCSTM8</name>
-                    <file> 10 13 23 16 6 7 11 2 19 24 27 26 25 0</file>
+                    <file> 8 19 12 23 11 9 10 3 20 16 15 17 14 0</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 6 27 10 2 23 25 13 11 24 26 19 16 7 0</file>
+                    <file> 11 15 8 3 12 14 19 10 16 17 20 23 9 0</file>
                 </tool>
             </inputs>
         </file>
-    </configuration>
-    <configuration>
-        <name>Release</name>
-        <outputs>
-            <file>$PROJ_DIR$\Release\Exe\JoystickController.out</file>
-            <file>$PROJ_DIR$\Release\Obj\main.pbi</file>
-            <file>$PROJ_DIR$\main.c</file>
-        </outputs>
         <file>
             <name>[ROOT_NODE]</name>
             <outputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 0</file>
+                    <file> 21 1</file>
                 </tool>
             </outputs>
         </file>
+    </configuration>
+    <configuration>
+        <name>Release</name>
+        <outputs>
+            <file>$PROJ_DIR$\main.c</file>
+            <file>$PROJ_DIR$\Release\Exe\JoystickController.out</file>
+            <file>$PROJ_DIR$\Release\Obj\main.pbi</file>
+        </outputs>
         <file>
             <name>$PROJ_DIR$\main.c</name>
             <outputs>
                 <tool>
                     <name>BICOMP</name>
+                    <file> 2</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>[ROOT_NODE]</name>
+            <outputs>
+                <tool>
+                    <name>ILINK</name>
                     <file> 1</file>
                 </tool>
             </outputs>
