@@ -1,0 +1,3 @@
+3D - can not actualize this geometry in little space
+3D-2 - rails its a bad idea, not available to use all axes in the same time. little space for buttons.
+3D-Rev3 - 
