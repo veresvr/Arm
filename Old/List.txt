@@ -1,3 +1,4 @@
 3D - can not actualize this geometry in little space
 3D-2 - rails its a bad idea, not available to use all axes in the same time. little space for buttons.
-3D-Rev3 - 
+3D-Rev3 - buttons cant show how hard pressing is, need to use optics for understand rotation angle
+3D-Rev4 - in design right now
